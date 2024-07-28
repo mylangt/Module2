@@ -54,7 +54,7 @@ public class PhanSo {
         }
     }
 
-    void xuat() {
+    public void xuat() {
         rutGon();
         if (mauSo == 1) {
             System.out.println(tuSo);
