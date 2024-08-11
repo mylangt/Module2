@@ -21,4 +21,9 @@ public class NewPhone extends Phone {
         return super.toString() +  "', quantity=" + quantity +
                 "'}";
     }
+
+    @Override
+    public double calculateTotalPrice() {
+        return getPrice() * quantity;
+    }
 }

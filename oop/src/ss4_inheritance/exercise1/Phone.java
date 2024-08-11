@@ -1,13 +1,11 @@
 package ss4_inheritance.exercise1;
 
-public class Phone {
+public abstract class Phone {
     private String id;
     private String name;
     private double price;
     private int warranty;
     private String manufacturer;
-
-
 
     public Phone(String id, String name, double price, int warranty, String manufacturer) {
         this.id = id;
@@ -66,4 +64,6 @@ public class Phone {
                 "', warranty=" + warranty +
                 "', manufacturer='" + manufacturer;
     }
+
+    public abstract double calculateTotalPrice();
 }

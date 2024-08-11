@@ -63,12 +63,15 @@ public class MenuPhone {
                     break;
 
                 case 7:
+                    System.out.println("Tổng giá của tất cả các điện thoại: "
+                            + calculateTotalPriceInStore());
                     break;
-
                 case 8:
+                    System.out.println("Nhập vào phần trăm muốn giảm giá: ");
+                    double percentDiscount = Double.parseDouble(scanner.nextLine());
+                    applyDiscountToOldPhones(percentDiscount);
+                    System.out.println("Đã giảm giá thành công!!!");
                     break;
-
-
             }
         } while (menuId != 9);
     }
@@ -599,4 +602,21 @@ public class MenuPhone {
             System.out.println(phones.get(i));
         }
     }
+
+    private static double calculateTotalPriceInStore() {
+        double total = 0.0;
+        for (Phone phone: phones) {
+            total += phone.calculateTotalPrice();
+        }
+        return total;
+    }
+
+    public static void applyDiscountToOldPhones(double percentDiscount) {
+        for (Phone phone: phones) {
+            if (phone instanceof OldPhone) {
+                ((OldPhone) phone).applyDiscount(percentDiscount);
+            }
+        }
+    }
+
 }

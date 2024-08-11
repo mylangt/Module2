@@ -1,6 +1,8 @@
 package ss4_inheritance.exercise1;
 
-public class OldPhone extends Phone {
+import ss6_abstractClass.Discountable;
+
+public class OldPhone extends Phone implements Discountable {
     private int batteryStatus;
     private String description;
 
@@ -32,5 +34,16 @@ public class OldPhone extends Phone {
                 "', batteryStatus=" + batteryStatus +
                 "', description='" + description +
                 "'}";
+    }
+
+    @Override
+    public double calculateTotalPrice() {
+        return getPrice();
+    }
+
+    @Override
+    public void applyDiscount(double percentDiscount) {
+        double discountedPrice = getPrice() * (1 - percentDiscount / 100.0);
+        setPrice(discountedPrice);
     }
 }
