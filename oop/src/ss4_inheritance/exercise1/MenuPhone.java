@@ -196,18 +196,24 @@ public class MenuPhone {
             System.out.println("4. Trở về menu chính");
 
             System.out.println("Vui lòng lựa chọn trong tìm kiếm");
-            menuSearchPhone = scanner.nextInt();
+            menuSearchPhone = Integer.parseInt(scanner.nextLine());
 
             switch (menuSearchPhone) {
-                case 1, 2, 3:
-                    subSearchPhone(scanner);
+                case 1:
+                    menuSearchAllPhone(scanner);
+                    break;
+                case 2:
+                    menuSearchOldPhone(scanner);
+                    break;
+                case 3:
+                    menuSearchNewPhone(scanner);
                     break;
             }
         } while (menuSearchPhone != 4);
 
     }
 
-    private static void subSearchPhone(Scanner scanner) {
+    private static void menuSearchAllPhone(Scanner scanner) {
         int menuSubSearchPhone;
         do {
             System.out.println("1. Tìm kiếm theo giá (Nhập khoảng từ bao nhiêu đến bao nhiêu)");
@@ -216,18 +222,173 @@ public class MenuPhone {
             System.out.println("4. Trở về menu chính");
 
             System.out.println("Vui lòng lựa chọn trong tìm kiếm");
-            menuSubSearchPhone = scanner.nextInt();
+            menuSubSearchPhone = Integer.parseInt(scanner.nextLine());
 
             switch (menuSubSearchPhone) {
                 case 1:
+                    System.out.println("Nhập vào khoảng giá muốn tìm");
+                    System.out.print("Nhập vào giá từ: ");
+                    int priceFrom = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Nhập vào giá đến: ");
+                    int priceTo = Integer.parseInt(scanner.nextLine());
+
+                    int count = 1;
+                    for (Phone phone : phones) {
+                        if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
                     break;
                 case 2:
+                    System.out.print("Nhập vào tên cần tìm: ");
+                    String name = scanner.nextLine();
+                    count = 1;
+                    for (Phone phone : phones) {
+                        if (phone.getName().contains(name)) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
                     break;
                 case 3:
+                    System.out.print("Nhập vào hãng điện thoại cần tìm: ");
+                    String manufacturer = scanner.nextLine();
+                    count = 1;
+                    for (Phone phone : phones) {
+                        if (phone.getManufacturer().contains(manufacturer)) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
                     break;
             }
         } while (menuSubSearchPhone != 4);
+    }
 
+    private static void menuSearchOldPhone(Scanner scanner) {
+        int menuSubSearchPhone;
+        do {
+            System.out.println("1. Tìm kiếm theo giá (Nhập khoảng từ bao nhiêu đến bao nhiêu)");
+            System.out.println("2. Tìm kiếm theo tên");
+            System.out.println("3. Tìm kiếm theo hãng");
+            System.out.println("4. Trở về menu chính");
+
+            System.out.println("Vui lòng lựa chọn trong tìm kiếm");
+            menuSubSearchPhone = Integer.parseInt(scanner.nextLine());
+
+            ArrayList<OldPhone> oldPhones = new ArrayList<>();
+
+            for (Phone value : phones) {
+                if (value instanceof OldPhone) {
+                    oldPhones.add((OldPhone) value);
+                }
+            }
+
+            switch (menuSubSearchPhone) {
+                case 1:
+                    System.out.println("Nhập vào khoảng giá muốn tìm");
+                    System.out.print("Nhập vào giá từ: ");
+                    int priceFrom = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Nhập vào giá đến: ");
+                    int priceTo = Integer.parseInt(scanner.nextLine());
+
+                    int count = 1;
+                    for (Phone phone : oldPhones) {
+                        if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
+                    break;
+                case 2:
+                    System.out.print("Nhập vào tên cần tìm: ");
+                    String name = scanner.nextLine();
+                    count = 1;
+                    for (Phone phone : oldPhones) {
+                        if (phone.getName().contains(name)) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.print("Nhập vào hãng điện thoại cần tìm: ");
+                    String manufacturer = scanner.nextLine();
+                    count = 1;
+                    for (Phone phone : oldPhones) {
+                        if (phone.getManufacturer().contains(manufacturer)) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
+                    break;
+            }
+        } while (menuSubSearchPhone != 4);
+    }
+
+    private static void menuSearchNewPhone(Scanner scanner) {
+        int menuSubSearchPhone;
+        do {
+            System.out.println("1. Tìm kiếm theo giá (Nhập khoảng từ bao nhiêu đến bao nhiêu)");
+            System.out.println("2. Tìm kiếm theo tên");
+            System.out.println("3. Tìm kiếm theo hãng");
+            System.out.println("4. Trở về menu chính");
+
+            System.out.println("Vui lòng lựa chọn trong tìm kiếm");
+            menuSubSearchPhone = Integer.parseInt(scanner.nextLine());
+
+            ArrayList<NewPhone> newPhones = new ArrayList<>();
+
+            for (Phone value : phones) {
+                if (value instanceof NewPhone) {
+                    newPhones.add((NewPhone) value);
+                }
+            }
+
+            switch (menuSubSearchPhone) {
+                case 1:
+                    System.out.println("Nhập vào khoảng giá muốn tìm");
+                    System.out.print("Nhập vào giá từ: ");
+                    int priceFrom = Integer.parseInt(scanner.nextLine());
+
+                    System.out.print("Nhập vào giá đến: ");
+                    int priceTo = Integer.parseInt(scanner.nextLine());
+
+                    int count = 1;
+                    for (Phone phone : newPhones) {
+                        if (phone.getPrice() >= priceFrom && phone.getPrice() <= priceTo) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
+                    break;
+                case 2:
+                    System.out.print("Nhập vào tên cần tìm: ");
+                    String name = scanner.nextLine();
+                    count = 1;
+                    for (Phone phone : newPhones) {
+                        if (phone.getName().contains(name)) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.print("Nhập vào hãng điện thoại cần tìm: ");
+                    String manufacturer = scanner.nextLine();
+                    count = 1;
+                    for (Phone phone : newPhones) {
+                        if (phone.getManufacturer().contains(manufacturer)) {
+                            System.out.print("Thông tin điện thoại thứ " + count++ + ": ");
+                            System.out.println(phone);
+                        }
+                    }
+                    break;
+            }
+        } while (menuSubSearchPhone != 4);
     }
 
     private static void sortPricePhone(Scanner scanner) {
@@ -239,12 +400,32 @@ public class MenuPhone {
             System.out.println("3. Trở về menu chính");
 
             System.out.println("Vui lòng lựa chọn trong sắp xếp giá");
-            menuSortPhone = scanner.nextInt();
+            menuSortPhone = Integer.parseInt(scanner.nextLine());
 
             switch (menuSortPhone) {
                 case 1:
+                    for (int i = 0; i < phones.size() - 1; i++) {
+                        for (int j = i + 1; j < phones.size(); j++) {
+                            if (phones.get(i).getPrice() > phones.get(j).getPrice()) {
+                                Phone temp = phones.get(i);
+                                phones.set(i, phones.get(j));
+                                phones.set(j, temp);
+                            }
+                        }
+                    }
+                    System.out.println("Sắp xếp thành công!!!");
                     break;
                 case 2:
+                    for (int i = 0; i < phones.size() - 1; i++) {
+                        for (int j = i + 1; j < phones.size(); j++) {
+                            if (phones.get(i).getPrice() < phones.get(j).getPrice()) {
+                                Phone temp = phones.get(i);
+                                phones.set(i, phones.get(j));
+                                phones.set(j, temp);
+                            }
+                        }
+                    }
+                    System.out.println("Sắp xếp thành công!!!");
                     break;
             }
         } while (menuSortPhone != 3);
