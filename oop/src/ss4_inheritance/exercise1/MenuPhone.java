@@ -1,8 +1,6 @@
 package ss4_inheritance.exercise1;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MenuPhone {
     static List<Phone> phones = new ArrayList<>();
@@ -407,27 +405,29 @@ public class MenuPhone {
 
             switch (menuSortPhone) {
                 case 1:
-                    for (int i = 0; i < phones.size() - 1; i++) {
-                        for (int j = i + 1; j < phones.size(); j++) {
-                            if (phones.get(i).getPrice() > phones.get(j).getPrice()) {
-                                Phone temp = phones.get(i);
-                                phones.set(i, phones.get(j));
-                                phones.set(j, temp);
-                            }
-                        }
-                    }
+                    Collections.sort(phones);
+//                    for (int i = 0; i < phones.size() - 1; i++) {
+//                        for (int j = i + 1; j < phones.size(); j++) {
+//                            if (phones.get(i).getPrice() > phones.get(j).getPrice()) {
+//                                Phone temp = phones.get(i);
+//                                phones.set(i, phones.get(j));
+//                                phones.set(j, temp);
+//                            }
+//                        }
+//                    }
                     System.out.println("Sắp xếp thành công!!!");
                     break;
                 case 2:
-                    for (int i = 0; i < phones.size() - 1; i++) {
-                        for (int j = i + 1; j < phones.size(); j++) {
-                            if (phones.get(i).getPrice() < phones.get(j).getPrice()) {
-                                Phone temp = phones.get(i);
-                                phones.set(i, phones.get(j));
-                                phones.set(j, temp);
-                            }
-                        }
-                    }
+                    phones.sort(Collections.reverseOrder());
+//                    for (int i = 0; i < phones.size() - 1; i++) {
+//                        for (int j = i + 1; j < phones.size(); j++) {
+//                            if (phones.get(i).getPrice() < phones.get(j).getPrice()) {
+//                                Phone temp = phones.get(i);
+//                                phones.set(i, phones.get(j));
+//                                phones.set(j, temp);
+//                            }
+//                        }
+//                    }
                     System.out.println("Sắp xếp thành công!!!");
                     break;
             }

@@ -1,6 +1,6 @@
 package ss4_inheritance.exercise1;
 
-public abstract class Phone {
+public abstract class Phone implements Comparable<Phone> {
     private String id;
     private String name;
     private double price;
@@ -66,4 +66,9 @@ public abstract class Phone {
     }
 
     public abstract double calculateTotalPrice();
+
+    @Override
+    public int compareTo(Phone o){
+        return Double.compare(this.getPrice(), o.price);
+    }
 }
