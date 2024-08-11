@@ -1,0 +1,10 @@
+ID, Name, Price, Warranty, Manafuture, Battery, Description, Quantity
+DTM001, iphone11, 1000.0, 6, apple,,, 4
+DTM002, iphone12, 2000.0, 8, apple,,, 6
+DTM003, iphone13, 3000.0, 10, apple,,, 8
+DTM004, iphone14, 4000.0, 12, apple,,, 10
+DTC001, iphone11, 1000.0, 6, apple, 70, Da su dung 1 nam
+DTC002, iphone12, 2000.0, 5, apple, 80, Da su dung 2 nam
+DTC003, iphone13, 3000.0, 3, apple, 0, Da su dung 3 nam
+DTM005, vuong, 1.0, 1, 1,,, 1
+DTC006, la, 1.0, 1, 1, 1, 111111111111111111

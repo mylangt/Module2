@@ -41,10 +41,7 @@ public class OldPhone extends Phone implements Discountable {
 
     @Override
     public String toString() {
-        return super.toString() +
-                "', batteryStatus=" + batteryStatus +
-                "', description='" + description +
-                "'}";
+        return super.toString() + String.format(", %s, %s", batteryStatus, description);
     }
 
     @Override

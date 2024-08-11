@@ -1,9 +1,14 @@
 package ss4_inheritance.exercise1;
 
+import ss11_file.util.ReadFileUtil;
+import ss11_file.util.WriteFileUtil;
+
+import java.io.IOException;
 import java.util.*;
 
 public class MenuPhone {
     static List<Phone> phones = new ArrayList<>();
+    private static final String PATH_FILE_PHONE = "src/ss11_file/data/phone.csv";
 
     static {
         phones.add(new NewPhone("DTM001", "iphone11", 1000, 6, "apple", 4));
@@ -440,7 +445,8 @@ public class MenuPhone {
         } while (menuSortPhone != 3);
     }
 
-    private static void addPhone(Scanner scanner) {
+    private static void addPhone(Scanner scanner) throws IOException {
+        List<Phone> phones = ReadFileUtil.readPhoneFile((PATH_FILE_PHONE));
         int menuAddPhone;
         do {
             System.out.println("-- THÊM MỚI --");
@@ -464,12 +470,12 @@ public class MenuPhone {
         } while (menuAddPhone != 3);
     }
 
-    private static void addNewPhone(String newPhoneId) {
+    private static void addNewPhone(String newPhoneId) throws IOException {
         NewPhone newPhone = new NewPhone();
         newPhone.input();
         newPhone.setId(newPhoneId);
         phones.add(newPhone);
-
+        WriteFileUtil.writePhoneFiles(PATH_FILE_PHONE, phones);
         System.out.println("Thêm mới điện thoại mới thành công !!! ");
     }
 
@@ -505,12 +511,12 @@ public class MenuPhone {
         return oldPhoneId;
     }
 
-    private static void addOldPhone(String oldPhoneId) {
+    private static void addOldPhone(String oldPhoneId) throws IOException {
         OldPhone oldPhone = new OldPhone();
         oldPhone.input();
         oldPhone.setId(oldPhoneId);
         phones.add(oldPhone);
-
+        WriteFileUtil.writePhoneFiles(PATH_FILE_PHONE, phones);
         System.out.println("Thêm mới điện thoại cũ thành công !!! ");
     }
 

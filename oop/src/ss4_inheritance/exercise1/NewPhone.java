@@ -30,8 +30,7 @@ public class NewPhone extends Phone {
 
     @Override
     public String toString() {
-        return super.toString() +  "', quantity=" + quantity +
-                "'}";
+        return super.toString() + String.format(",,, %s" , quantity);
     }
 
     @Override

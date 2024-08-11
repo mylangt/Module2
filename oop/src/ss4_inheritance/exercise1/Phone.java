@@ -69,12 +69,7 @@ public abstract class Phone implements Comparable<Phone> {
 
     @Override
     public String toString() {
-        return "{" +
-                "id='" + id +
-                "', name='" + name +
-                "', price=" + price +
-                "', warranty=" + warranty +
-                "', manufacturer='" + manufacturer;
+        return String.format("%s, %s, %s, %s, %s", id, name, price, warranty, manufacturer);
     }
 
     public abstract double calculateTotalPrice();
