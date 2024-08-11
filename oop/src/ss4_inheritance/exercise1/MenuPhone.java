@@ -5,17 +5,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuPhone {
-    static List<NewPhone> newPhoneList = new ArrayList<>();
-    static List<OldPhone> oldPhoneList = new ArrayList<>();
+    static List<Phone> phones = new ArrayList<>();
 
     static {
-        newPhoneList.add(new NewPhone("DTM001", "iphone11", 1000, 6, "apple", 4));
-        newPhoneList.add(new NewPhone("DTM002", "iphone12", 2000, 8, "apple", 6));
-        newPhoneList.add(new NewPhone("DTM003", "iphone13", 3000, 10, "apple", 8));
-        newPhoneList.add(new NewPhone("DTM004", "iphone14", 4000, 12, "apple", 10));
-        oldPhoneList.add(new OldPhone("DTC001", "iphone11", 1000, 6, "apple", "Da su dung 1 nam", 70));
-        oldPhoneList.add(new OldPhone("DTC002", "iphone12", 2000, 5, "apple", "Da su dung 2 nam", 80));
-        oldPhoneList.add(new OldPhone("DTC003", "iphone13", 3000, 3, "apple", "Da su dung 3 nam", 0));
+        phones.add(new NewPhone("DTM001", "iphone11", 1000, 6, "apple", 4));
+        phones.add(new NewPhone("DTM002", "iphone12", 2000, 8, "apple", 6));
+        phones.add(new NewPhone("DTM003", "iphone13", 3000, 10, "apple", 8));
+        phones.add(new NewPhone("DTM004", "iphone14", 4000, 12, "apple", 10));
+        phones.add(new OldPhone("DTC001", "iphone11", 1000, 6, "apple", "Da su dung 1 nam", 70));
+        phones.add(new OldPhone("DTC002", "iphone12", 2000, 5, "apple", "Da su dung 2 nam", 80));
+        phones.add(new OldPhone("DTC003", "iphone13", 3000, 3, "apple", "Da su dung 3 nam", 0));
     }
 
     public static void main(String[] args) {
@@ -78,13 +77,13 @@ public class MenuPhone {
         String idDelelte = scanner.nextLine();
         boolean isExistPhone = false;
         if (idDelelte.startsWith("DTC")) {
-            for (OldPhone oldPhone : oldPhoneList) {
-                if (oldPhone.getId().equals(idDelelte)) {
+            for (Phone phone : phones) {
+                if (phone.getId().equals(idDelelte)) {
                     isExistPhone = true;
-                    System.out.printf("Bạn có xóa điện thoại có mã %s không?\n", oldPhone.getId());
+                    System.out.printf("Bạn có xóa điện thoại có mã %s không?\n", phone.getId());
                     System.out.println("Chọn Yes để xác nhận xóa, No để hủy");
                     if ("yes".equalsIgnoreCase(scanner.nextLine())) {
-                        oldPhoneList.remove(oldPhone);
+                        phones.remove(phone);
                         System.out.println("Xóa thành công!");
                     } else {
                         System.out.println("Đã hủy việc xóa!");
@@ -93,13 +92,13 @@ public class MenuPhone {
                 }
             }
         } else if (idDelelte.startsWith("DTM")) {
-            for (NewPhone newPhone : newPhoneList) {
-                if (newPhone.getId().equals(idDelelte)) {
+            for (Phone phone : phones) {
+                if (phone.getId().equals(idDelelte)) {
                     isExistPhone = true;
-                    System.out.printf("Bạn có xóa điện thoại có mã %s không?\n", newPhone.getId());
+                    System.out.printf("Bạn có xóa điện thoại có mã %s không?\n", phone.getId());
                     System.out.println("Chọn Yes để xác nhận xóa, No để hủy");
                     if ("yes".equalsIgnoreCase(scanner.nextLine())) {
-                        newPhoneList.remove(newPhone);
+                        phones.remove(phone);
                         System.out.println("Xóa thành công!");
                     } else {
                         System.out.println("Đã hủy việc xóa!");
@@ -117,9 +116,10 @@ public class MenuPhone {
         String idUpdate = scanner.nextLine();
         boolean isExistPhone = false;
         if (idUpdate.startsWith("DTC")) {
-            for (OldPhone oldPhone : oldPhoneList) {
-                if (oldPhone.getId().equals(idUpdate)) {
+            for (Phone phone : phones) {
+                if (phone.getId().equals(idUpdate)) {
                     isExistPhone = true;
+                    OldPhone oldPhone = (OldPhone) phone;
 
                     System.out.print("Vui lòng chỉnh sửa tên điện thoại cũ: ");
                     String name = scanner.nextLine();
@@ -151,9 +151,10 @@ public class MenuPhone {
             }
 
         } else if (idUpdate.startsWith("DTM")) {
-            for (NewPhone newPhone : newPhoneList) {
-                if (newPhone.getId().equals(idUpdate)) {
+            for (Phone phone : phones) {
+                if (phone.getId().equals(idUpdate)) {
                     isExistPhone = true;
+                    NewPhone newPhone = (NewPhone) phone;
 
                     System.out.print("Vui lòng nhập tên điện thoại mới: ");
                     String name = scanner.nextLine();
@@ -290,19 +291,19 @@ public class MenuPhone {
         int quantity = Integer.parseInt(scanner.nextLine());
 
         NewPhone newPhone = new NewPhone(newPhoneId, name, price, warranty, manufacturer, quantity);
-        newPhoneList.add(newPhone);
+        phones.add(newPhone);
 
-        System.out.print("Thêm mới điện thoại mới thành công !!! ");
+        System.out.println("Thêm mới điện thoại mới thành công !!! ");
     }
 
     private static String getNewPhoneId() {
         String newPhoneId;
-        if (newPhoneList.isEmpty()) {
+        if (phones.isEmpty()) {
             newPhoneId = "DTM001";
         }
-        int maxId = Integer.parseInt(newPhoneList.get(0).getId().substring(3));
-        for (int i = 0; i < newPhoneList.size(); i++) {
-            int id = Integer.parseInt(newPhoneList.get(i).getId().substring(3));
+        int maxId = Integer.parseInt(phones.get(0).getId().substring(3));
+        for (int i = 0; i < phones.size(); i++) {
+            int id = Integer.parseInt(phones.get(i).getId().substring(3));
             if (maxId < id) {
                 maxId = id;
             }
@@ -313,12 +314,12 @@ public class MenuPhone {
 
     private static String getOldPhoneId() {
         String oldPhoneId;
-        if (oldPhoneList.isEmpty()) {
+        if (phones.isEmpty()) {
             oldPhoneId = "DTC001";
         }
-        int maxId = Integer.parseInt(oldPhoneList.get(0).getId().substring(3));
-        for (int i = 0; i < oldPhoneList.size(); i++) {
-            int id = Integer.parseInt(oldPhoneList.get(i).getId().substring(3));
+        int maxId = Integer.parseInt(phones.get(0).getId().substring(3));
+        for (int i = 0; i < phones.size(); i++) {
+            int id = Integer.parseInt(phones.get(i).getId().substring(3));
             if (maxId < id) {
                 maxId = id;
             }
@@ -347,9 +348,9 @@ public class MenuPhone {
         String description = scanner.nextLine();
 
         OldPhone oldPhone = new OldPhone(oldPhoneId, name, price, warranty, manufacturer, description, batteryStatus);
-        oldPhoneList.add(oldPhone);
+        phones.add(oldPhone);
 
-        System.out.print("Thêm mới điện thoại cũ thành công !!! ");
+        System.out.println("Thêm mới điện thoại cũ thành công !!! ");
     }
 
     private static void listPhone(Scanner scanner) {
@@ -379,21 +380,42 @@ public class MenuPhone {
     }
 
     private static void getNewPhone() {
-        for (int i = 0; i < newPhoneList.size(); i++ ) {
-            System.out.print("Thông tin điện thoại mới thứ " + (i+1) + " là: ");
-            System.out.println(newPhoneList.get(i));
+        int newPhoneCount = 0;
+
+        for (int i = 0; i < phones.size(); i++ ) {
+            if (phones.get(i) instanceof NewPhone) {
+                newPhoneCount++;
+                System.out.print("Thông tin điện thoại mới thứ " + newPhoneCount + " là: ");
+                System.out.println(phones.get(i));
+            }
         }
     }
 
     private static void getOldPhone() {
-        for (int i = 0; i < oldPhoneList.size(); i++ ) {
-            System.out.print("Thông tin điện thoại cũ thứ " + (i+1) + " là: ");
-            System.out.println(oldPhoneList.get(i));
+        int oldPhoneCount = 0;
+
+        for (int i = 0; i < phones.size(); i++ ) {
+            if (phones.get(i) instanceof OldPhone) {
+                oldPhoneCount++;
+                System.out.print("Thông tin điện thoại cũ thứ " + oldPhoneCount + " là: ");
+                System.out.println(phones.get(i));
+            }
         }
     }
 
     private static void getAllPhone() {
-        getNewPhone();
-        getOldPhone();
+        int newPhoneCount = 0;
+        int oldPhoneCount = 0;
+
+        for (int i = 0; i < phones.size(); i++ ) {
+            if (phones.get(i) instanceof NewPhone) {
+                newPhoneCount++;
+                System.out.print("Thông tin điện thoại mới thứ " + newPhoneCount + " là: ");
+            } else {
+                oldPhoneCount++;
+                System.out.print("Thông tin điện thoại cũ thứ " + oldPhoneCount + " là: ");
+            }
+            System.out.println(phones.get(i));
+        }
     }
 }
