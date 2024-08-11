@@ -19,59 +19,65 @@ public class MenuPhone {
 
         Scanner scanner = new Scanner(System.in);
         int menuId;
-        do {
-            System.out.println("-- CHƯƠNG TRÌNH QUẢN LÝ ĐIỆN THOẠI -");
-            System.out.println("1. Xem danh sách điện thoại");
-            System.out.println("2. Thêm mới");
-            System.out.println("3. Cập nhật");
-            System.out.println("4. Xóa");
-            System.out.println("5. Sắp xếp theo giá");
-            System.out.println("6. Tìm kiếm");
-            System.out.println("7. Tính tổng tiền");
-            System.out.println("8. Giảm giá cho điện thoại cũ");
-            System.out.println("9. Thoát");
+        try {
+            do {
+                System.out.println("-- CHƯƠNG TRÌNH QUẢN LÝ ĐIỆN THOẠI -");
+                System.out.println("1. Xem danh sách điện thoại");
+                System.out.println("2. Thêm mới");
+                System.out.println("3. Cập nhật");
+                System.out.println("4. Xóa");
+                System.out.println("5. Sắp xếp theo giá");
+                System.out.println("6. Tìm kiếm");
+                System.out.println("7. Tính tổng tiền");
+                System.out.println("8. Giảm giá cho điện thoại cũ");
+                System.out.println("9. Thoát");
 
-            System.out.println("Vui lòng chọn menu");
-            menuId = Integer.parseInt(scanner.nextLine());
+                System.out.println("Vui lòng chọn menu");
+                menuId = Integer.parseInt(scanner.nextLine());
 
-            switch (menuId) {
-                case 1:
-                    listPhone(scanner);
-                    break;
+                switch (menuId) {
+                    case 1:
+                        listPhone(scanner);
+                        break;
 
-                case 2:
-                    addPhone(scanner);
-                    break;
+                    case 2:
+                        addPhone(scanner);
+                        break;
 
-                case 3:
-                    getAllPhone();
-                    updatePhone(scanner);
-                    break;
-                case 4:
-                    getAllPhone();
-                    deletePhone(scanner);
-                    break;
+                    case 3:
+                        getAllPhone();
+                        updatePhone(scanner);
+                        break;
+                    case 4:
+                        getAllPhone();
+                        deletePhone(scanner);
+                        break;
 
-                case 5:
-                    sortPricePhone(scanner);
-                    break;
+                    case 5:
+                        sortPricePhone(scanner);
+                        break;
 
-                case 6:
-                    searchPhone(scanner);
-                    break;
+                    case 6:
+                        searchPhone(scanner);
+                        break;
 
-                case 7:
-                    System.out.println("Tổng giá của tất cả các điện thoại: "
-                            + calculateTotalPriceInStore());
-                    break;
-                case 8:
-                    System.out.println("Nhập vào phần trăm muốn giảm giá: ");
-                    double percentDiscount = Double.parseDouble(scanner.nextLine());
-                    applyDiscountToOldPhones(percentDiscount);
-                    System.out.println("Đã giảm giá thành công!!!");
-                    break;
-            }
-        } while (menuId != 9);
+                    case 7:
+                        System.out.println("Tổng giá của tất cả các điện thoại: "
+                                + calculateTotalPriceInStore());
+                        break;
+                    case 8:
+                        System.out.println("Nhập vào phần trăm muốn giảm giá: ");
+                        double percentDiscount = Double.parseDouble(scanner.nextLine());
+                        applyDiscountToOldPhones(percentDiscount);
+                        System.out.println("Đã giảm giá thành công!!!");
+                        break;
+                }
+            } while (menuId != 9);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Có một số lỗi!!!" +
+                    "xin vui lòng thử lại.");
+        }
     }
     private static void deletePhone(Scanner scanner) {
         System.out.print("Vui lòng nhập id sản phẩm bạn muốn xóa: ");
@@ -448,33 +454,20 @@ public class MenuPhone {
             switch (menuAddPhone) {
                 case 1:
                     String newPhoneId = getNewPhoneId();
-                    addNewPhone(scanner, newPhoneId);
+                    addNewPhone(newPhoneId);
                     break;
                 case 2:
                     String oldPhoneId = getOldPhoneId();
-                    addOldPhone(scanner, oldPhoneId);
+                    addOldPhone(oldPhoneId);
                     break;
             }
         } while (menuAddPhone != 3);
     }
 
-    private static void addNewPhone(Scanner scanner, String newPhoneId) {
-        System.out.print("Vui lòng nhập tên điện thoại mới: ");
-        String name = scanner.nextLine();
-
-        System.out.print("Vui lòng nhập giá bán điện thoại mới: ");
-        double price = Double.parseDouble(scanner.nextLine());
-
-        System.out.print("Vui lòng nhập thời hạn bảo hành điện thoại mới: ");
-        int warranty = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Vui lòng nhập hãng sản xuất điện thoại mới: ");
-        String manufacturer = scanner.nextLine();
-
-        System.out.print("Vui lòng nhập số lượng điện thoại mới: ");
-        int quantity = Integer.parseInt(scanner.nextLine());
-
-        NewPhone newPhone = new NewPhone(newPhoneId, name, price, warranty, manufacturer, quantity);
+    private static void addNewPhone(String newPhoneId) {
+        NewPhone newPhone = new NewPhone();
+        newPhone.input();
+        newPhone.setId(newPhoneId);
         phones.add(newPhone);
 
         System.out.println("Thêm mới điện thoại mới thành công !!! ");
@@ -512,26 +505,10 @@ public class MenuPhone {
         return oldPhoneId;
     }
 
-    private static void addOldPhone(Scanner scanner, String oldPhoneId) {
-        System.out.print("Vui lòng nhập tên điện thoại cũ: ");
-        String name = scanner.nextLine();
-
-        System.out.print("Vui lòng nhập giá bán điện thoại cũ: ");
-        double price = Double.parseDouble(scanner.nextLine());
-
-        System.out.print("Vui lòng nhập thời hạn bảo hành điện thoại cũ: ");
-        int warranty = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Vui lòng nhập hãng sản xuất điện thoại cũ: ");
-        String manufacturer = scanner.nextLine();
-
-        System.out.print("Vui lòng nhập tình trạng pin điện thoại cũ: ");
-        int batteryStatus = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Vui lòng nhập mô tả điện thoại cũ: ");
-        String description = scanner.nextLine();
-
-        OldPhone oldPhone = new OldPhone(oldPhoneId, name, price, warranty, manufacturer, description, batteryStatus);
+    private static void addOldPhone(String oldPhoneId) {
+        OldPhone oldPhone = new OldPhone();
+        oldPhone.input();
+        oldPhone.setId(oldPhoneId);
         phones.add(oldPhone);
 
         System.out.println("Thêm mới điện thoại cũ thành công !!! ");

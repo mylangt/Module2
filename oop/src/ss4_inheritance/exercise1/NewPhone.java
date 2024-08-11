@@ -1,7 +1,13 @@
 package ss4_inheritance.exercise1;
 
+import ss10_exception.validation.PhoneValidation;
+
 public class NewPhone extends Phone {
     private int quantity;
+
+    public NewPhone() {
+        super();
+    }
 
     public NewPhone(String id, String name, double price, int warranty, String manufacturer, int quantity) {
         super(id, name, price, warranty, manufacturer);
@@ -14,6 +20,12 @@ public class NewPhone extends Phone {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public void input(){
+        super.input();
+        this.quantity = PhoneValidation.inputQuantity("quantity");
     }
 
     @Override

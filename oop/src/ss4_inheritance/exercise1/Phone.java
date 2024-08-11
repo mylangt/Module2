@@ -1,5 +1,7 @@
 package ss4_inheritance.exercise1;
 
+import ss10_exception.validation.PhoneValidation;
+
 public abstract class Phone implements Comparable<Phone> {
     private String id;
     private String name;
@@ -7,12 +9,22 @@ public abstract class Phone implements Comparable<Phone> {
     private int warranty;
     private String manufacturer;
 
+    public Phone() {
+    }
+
     public Phone(String id, String name, double price, int warranty, String manufacturer) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.warranty = warranty;
         this.manufacturer = manufacturer;
+    }
+
+    public void input() {
+        this.name = PhoneValidation.inputName("name");
+        this.price = PhoneValidation.inputPrice("price");
+        this.warranty = PhoneValidation.inputWarranty("warranty");
+        this.manufacturer = PhoneValidation.inputManufacturer("manufacturer");
     }
 
     public String getId() {

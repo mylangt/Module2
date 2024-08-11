@@ -1,10 +1,14 @@
 package ss4_inheritance.exercise1;
 
+import ss10_exception.validation.PhoneValidation;
 import ss6_abstractClass.Discountable;
 
 public class OldPhone extends Phone implements Discountable {
     private int batteryStatus;
     private String description;
+
+    public OldPhone() {
+    }
 
     public OldPhone(String id, String name, double price, int warranty, String manufacturer, String description, int batteryStatus) {
         super(id, name, price, warranty, manufacturer);
@@ -26,6 +30,13 @@ public class OldPhone extends Phone implements Discountable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public void input(){
+        super.input();
+        this.batteryStatus = PhoneValidation.inputBatteryPercentage("batteryStatus");
+        this.description = PhoneValidation.inputDescription("description");
     }
 
     @Override
